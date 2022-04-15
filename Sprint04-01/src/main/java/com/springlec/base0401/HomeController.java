@@ -88,35 +88,45 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping("student/{studentId}")//{data}받아올수 있어.url에 값을 넣어서 보낼때/다음 바로 값적어서 보낼수 있어.
+	@RequestMapping("student/{studentId}")/*{data}받아올수 있어.url에 값을 넣어서 보낼때/다음 바로 값적어서 보낼수 있어.*/
 	public String getStudent(@PathVariable String studentId, Model model) {
 		model.addAttribute("studentId", studentId);
 		return "student/studentview";
 	}
-	
+
 	
 	@RequestMapping("test/login")
 	public String login() {
 		return "test/login";
 	}
 	
+	/*@RequestParam 사용*/
+//	@RequestMapping("test/viewIDPW")
+//	public String loginview(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
+//		 
+//		model.addAttribute("id", id);
+//		model.addAttribute("pw", pw);
+//		return "test/viewIDPW";
+//	}
 	
-	@RequestMapping("test/viewIDPW")
-	public String loginview(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
-		 
-		model.addAttribute("id", id);
-		model.addAttribute("pw", pw);
-		return "test/viewIDPW";
-	}
-	
-	
+	/*dto 사용*/
 //	@RequestMapping("test/viewIDPW")//${user.id } 이런식으로 받아야함.
 //	public String loginview(User user) {
 //		return "test/viewIDPW";
-//		
 //	}
 	
-	
+	/*HttpServletRequest request*/
+	@RequestMapping("test/viewIDPW")
+	public String loginview(HttpServletRequest request, Model model) {
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		
+		model.addAttribute("id", id);
+		model.addAttribute("pw", pw);
+		
+		return "test/viewIDPW";
+	}
 	
 	
 	
